@@ -10,6 +10,10 @@ public class Main {
     // Creating an ArrayList to get transactions/information from the transactions.csv file.
 
     public static void main(String[] args) {
+        System.out.println("=======================");
+        System.out.println("Welcome to Ledger Pro!");
+        System.out.println("=======================");
+        System.out.println();
         String command;
         do {
             String homeMenu = "What would you like to do?\n D) Add Deposit\n P) Make Payment (Debit)\n L) Ledger\n X) Exit\n";
@@ -62,11 +66,17 @@ public class Main {
 
 
     private static void addDeposit() {
-        System.out.println("addDeposit works.");
+        String depositDesc = ConsoleHelper.promptForString("Enter deposit information");
+        String depositVendor = ConsoleHelper.promptForString("Enter vendor");
+        Double depositAmount = ConsoleHelper.promptForDouble("Enter amount");
+        System.out.println("Thank you, information has been added.");
     }
 
     private static void makePayment() {
-        System.out.println("makePayment works.");
+        String paymentDesc = ConsoleHelper.promptForString("Enter payment description");
+        String paymentVendor = ConsoleHelper.promptForString("Enter vendor");
+        Double paymentAmount = ConsoleHelper.promptForDouble("Enter amount");
+        System.out.println("Thank you, payment has been confirmed.");
     }
 // Ledgers Menu: ------------------------------------------------------------------------------------------------------------------------------------
     private static void ledgerMenu() {
@@ -210,7 +220,6 @@ public class Main {
                 Transaction t = new Transaction(desc, vendor, amount); // Puts the split information in order.
                 transactions.add(t);
             }
-
             // Close both the FileReader and BufferedReader.
             br.close();
             fileReader.close();
@@ -219,9 +228,6 @@ public class Main {
             System.out.println("Something is wrong..");
         }
 
-
-
     return transactions; // Change from null to transactions after changing line 6 from private static to public static.
     }
-
 }
