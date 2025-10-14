@@ -3,7 +3,10 @@ package com.pluralsight;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Main {
     public static ArrayList<Transaction> transactions = getTransactionsFromFile();
@@ -69,8 +72,11 @@ public class Main {
         String depositDesc = ConsoleHelper.promptForString("Enter deposit information");
         String depositVendor = ConsoleHelper.promptForString("Enter vendor");
         Double depositAmount = ConsoleHelper.promptForDouble("Enter amount");
+
         System.out.println("Thank you, information has been added.");
     }
+
+
 
     private static void makePayment() {
         String paymentDesc = ConsoleHelper.promptForString("Enter payment description");
@@ -129,7 +135,10 @@ public class Main {
     }
 
     private static void displayEntries() {
-        System.out.println("displayEntries works.");
+        System.out.println("All entries: ");
+        for (Transaction e : transactions){
+            System.out.println(e);
+        }
     }
 
     private static void displayDEntries() {
@@ -217,7 +226,7 @@ public class Main {
                 String vendor = parts[1]; // Second part that's split.
                 double amount = Double.parseDouble(parts[2]); // Third part that's split.
 
-                Transaction t = new Transaction(desc, vendor, amount); // Puts the split information in order.
+                Transaction t = new Transaction(LocalDate.now(),desc, vendor, amount); // Puts the split information in order.
                 transactions.add(t);
             }
             // Close both the FileReader and BufferedReader.
@@ -230,4 +239,6 @@ public class Main {
 
     return transactions; // Change from null to transactions after changing line 6 from private static to public static.
     }
+
+
 }
