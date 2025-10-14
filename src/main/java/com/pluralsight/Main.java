@@ -3,14 +3,17 @@ package com.pluralsight;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class Main {
     public static ArrayList<Transaction> transactions = getTransactionsFromFile();
     // Creating an ArrayList to get transactions/information from the transactions.csv file.
+
+
 
     public static void main(String[] args) {
         System.out.println("=======================");
@@ -72,13 +75,38 @@ public class Main {
         String depositDesc = ConsoleHelper.promptForString("Enter deposit information");
         String depositVendor = ConsoleHelper.promptForString("Enter vendor");
         Double depositAmount = ConsoleHelper.promptForDouble("Enter amount");
-
+        getTime();
         System.out.println("Thank you, information has been added.");
+        Transaction newDeposit = new Transaction(LocalDate.now(),LocalTime.now(),depositDesc,depositVendor,depositAmount);
+        Main.transactions.add(newDeposit);
+
+        // This records the time.
+//        LocalDate thisDate = LocalDate.now();
+//        LocalTime thisTime = LocalTime.now();
+
+        //Formatting the recorded time.
+//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+//
+//        String date = thisDate.format(dateFormatter);
+//        String time = thisTime.format(timeFormatter);
+
+
+        try  {
+            FileWriter fw = new FileWriter("transactions.csv",true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.newLine();
+            bw.write( newDeposit.getDate() + "|" + newDeposit.getTime() + "|" + newDeposit.getDesc() + "|" + newDeposit.getVendor() + "|" + newDeposit.getAmount());
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Something is wrong with addProduct()...");
+        }
     }
 
 
 
     private static void makePayment() {
+        LocalDateTime.now();
         String paymentDesc = ConsoleHelper.promptForString("Enter payment description");
         String paymentVendor = ConsoleHelper.promptForString("Enter vendor");
         Double paymentAmount = ConsoleHelper.promptForDouble("Enter amount");
@@ -222,11 +250,13 @@ public class Main {
 
             while((lineFromString = br.readLine()) != null){
                 String[] parts = lineFromString.split("\\|"); // Splits the total information given at the "|":
-                String desc = parts[0]; // First part that's split.
-                String vendor = parts[1]; // Second part that's split.
-                double amount = Double.parseDouble(parts[2]); // Third part that's split.
+                LocalDate date = LocalDate.parse(parts[0]);
+                LocalTime time = LocalTime.parse(parts[1]);
+                String desc = parts[2]; // First part that's split.
+                String vendor = parts[3]; // Second part that's split.
+                double amount = Double.parseDouble(parts[4]); // Third part that's split.
 
-                Transaction t = new Transaction(LocalDate.now(),desc, vendor, amount); // Puts the split information in order.
+                Transaction t = new Transaction(date,time,desc, vendor, amount); // Puts the split information in order.
                 transactions.add(t);
             }
             // Close both the FileReader and BufferedReader.
@@ -238,6 +268,14 @@ public class Main {
         }
 
     return transactions; // Change from null to transactions after changing line 6 from private static to public static.
+    }
+
+    public static void getTime() {
+
+
+
+
+
     }
 
 
