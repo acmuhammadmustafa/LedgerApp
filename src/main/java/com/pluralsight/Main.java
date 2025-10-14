@@ -47,7 +47,7 @@ public class Main {
                     System.out.println("Invalid input. Please enter a valid option.");
                     System.out.println("======================");
             }
-        } while (command !="x");
+        } while (command.equalsIgnoreCase("X"));
         }
 
 
@@ -136,7 +136,7 @@ public class Main {
             }
 
 
-        } while (ledgerCommand != "H");
+        } while (ledgerCommand.equalsIgnoreCase("H"));
     }
 
     private static void displayEntries() {
@@ -240,11 +240,30 @@ public class Main {
     }
 
     private static void yearToDate() {
-        System.out.println("Year to date works.");
+        LocalDate today = LocalDate.now();
+        LocalDate startOfYear = today.withDayOfYear(1);
+
+        System.out.println("====== Year to Date Transactions ======");
+
+        for (Transaction transaction : transactions){
+            if (!transaction.getDate().isBefore(startOfYear)){
+                System.out.println(transaction);
+            }
+        }
     }
 
     private static void previousYear() {
-        System.out.println("Previous year works.");
+        int currentYear = LocalDate.now().getYear(); // Not LocalDate because what will be returned is an integer value, LocalDate wants a full date.
+        LocalDate startOfPreviousYear = LocalDate.of(currentYear-1,1,1); // (1, 1, 1 is the equivalent of saying January 1st of the previous year)
+
+        System.out.println("====== Previous Year Transactions ======");
+
+        for (Transaction transaction : transactions){
+            LocalDate transactionDate = transaction.getDate();
+            if ((transactionDate.isEqual(startOfPreviousYear) || transactionDate.isAfter(startOfPreviousYear)) && (transactionDate.isBefore(LocalDate.of(currentYear, 1, 1)))){
+                System.out.println(transaction);
+            }
+        }
     }
 
     private static void searchByVendor() {
