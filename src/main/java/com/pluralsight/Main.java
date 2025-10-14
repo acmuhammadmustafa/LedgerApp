@@ -1,13 +1,10 @@
 package com.pluralsight;
 
-import jdk.jshell.spi.ExecutionControl;
-
 import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
 
 public class Main {
     public static ArrayList<Transaction> transactions = getTransactionsFromFile();
@@ -25,20 +22,10 @@ public class Main {
             String homeMenu = "What would you like to do?\n D) Add Deposit\n P) Make Payment (Debit)\n L) Ledger\n X) Exit\n";
             System.out.println(homeMenu);
 
-            command = ConsoleHelper.promptForString("Enter your command");
+            command = ConsoleHelper.promptForString("Enter your command").toLowerCase();
             switch (command) {
-                case "D":
-                    addDeposit();
-                    System.out.println("======================");
-                    break;
-
                 case "d":
                     addDeposit();
-                    System.out.println("======================");
-                    break;
-
-                case "P":
-                    makePayment();
                     System.out.println("======================");
                     break;
 
@@ -47,18 +34,10 @@ public class Main {
                     System.out.println("======================");
                     break;
 
-                case "L":
-                    ledgerMenu();
-                    System.out.println("======================");
-                    break;
-
                 case "l":
                     ledgerMenu();
                     System.out.println("======================");
                     break;
-
-                case "X":
-                    return;
 
                 case "x":
                     return;
@@ -67,50 +46,60 @@ public class Main {
                     System.out.println("Invalid input. Please enter a valid option.");
                     System.out.println("======================");
             }
-        } while (command != "X" || command !="x");
+        } while (command !="x");
         }
 
 
     private static void addDeposit() {
         String depositDesc = ConsoleHelper.promptForString("Enter deposit information");
         String depositVendor = ConsoleHelper.promptForString("Enter vendor");
-        Double depositAmount = ConsoleHelper.promptForDouble("Enter amount");
-        getTime();
+        double depositAmount = ConsoleHelper.promptForDouble("Enter amount");
         System.out.println("Thank you, information has been added.");
         Transaction newDeposit = new Transaction(LocalDate.now(),LocalTime.now(),depositDesc,depositVendor,depositAmount);
         Main.transactions.add(newDeposit);
 
-        // This records the time.
-//        LocalDate thisDate = LocalDate.now();
-//        LocalTime thisTime = LocalTime.now();
+//        Formatting the recorded time.
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-        //Formatting the recorded time.
-//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-//
-//        String date = thisDate.format(dateFormatter);
-//        String time = thisTime.format(timeFormatter);
-
+        String formattedDate = newDeposit.getDate().format(dateFormatter);
+        String formattedTime = newDeposit.getTime().format(timeFormatter);
 
         try  {
             FileWriter fw = new FileWriter("transactions.csv",true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.newLine();
-            bw.write( newDeposit.getDate() + "|" + newDeposit.getTime() + "|" + newDeposit.getDesc() + "|" + newDeposit.getVendor() + "|" + newDeposit.getAmount());
+            bw.write(formattedDate + "|" + formattedTime + "|" + newDeposit.getDesc() + "|" + newDeposit.getVendor() + "|" + newDeposit.getAmount());
             bw.close();
         } catch (IOException e) {
             System.out.println("Something is wrong with addProduct()...");
         }
     }
 
-
-
     private static void makePayment() {
         LocalDateTime.now();
         String paymentDesc = ConsoleHelper.promptForString("Enter payment description");
         String paymentVendor = ConsoleHelper.promptForString("Enter vendor");
-        Double paymentAmount = ConsoleHelper.promptForDouble("Enter amount");
+        double paymentAmount = ConsoleHelper.promptForDouble("Enter amount");
         System.out.println("Thank you, payment has been confirmed.");
+        Transaction newPayment = new Transaction(LocalDate.now(),LocalTime.now(),paymentDesc,paymentVendor,-paymentAmount);
+        Main.transactions.add(newPayment);
+        //        Formatting the recorded time.
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        String formattedDate = newPayment.getDate().format(dateFormatter);
+        String formattedTime = newPayment.getTime().format(timeFormatter);
+
+        try  {
+            FileWriter fw = new FileWriter("transactions.csv",true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.newLine();
+            bw.write(formattedDate + "|" + formattedTime + "|" + newPayment.getDesc() + "|" + newPayment.getVendor() + "|" + newPayment.getAmount());
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Something is wrong with addProduct()...");
+        }
     }
 // Ledgers Menu: ------------------------------------------------------------------------------------------------------------------------------------
     private static void ledgerMenu() {
@@ -119,7 +108,7 @@ public class Main {
         String ledgerCommand;
         do{
             System.out.println(ledgerMenu);
-            ledgerCommand = ConsoleHelper.promptForString("Enter your command");
+            ledgerCommand = ConsoleHelper.promptForString("Enter your command").toUpperCase();
             switch (ledgerCommand){
                 case "A":
                     displayEntries();
@@ -136,30 +125,17 @@ public class Main {
                     System.out.println("======================");
                     break;
 
-                case "p":
-                    displayNegativeEntries();
-                    System.out.println("======================");
-                    break;
-
                 case "R":
-                    reportsMenu();
-                    System.out.println("======================");
-                    break;
-
-                case "r":
                     reportsMenu();
                     System.out.println("======================");
                     break;
 
                 case "H":
                     return;
-
-                case "h":
-                    return;
             }
 
 
-        } while (ledgerCommand != "H" || ledgerCommand != "h");
+        } while (ledgerCommand != "H");
     }
 
     private static void displayEntries() {
@@ -216,7 +192,7 @@ public class Main {
             }
 
 
-        } while (reportCommand != 0 || reportCommand != 0);
+        } while (reportCommand != 0);
     }
 
     private static void monthToDate() {
@@ -270,13 +246,12 @@ public class Main {
     return transactions; // Change from null to transactions after changing line 6 from private static to public static.
     }
 
-    public static void getTime() {
+    public static ArrayList<Transaction>addTransactionToFile(){
 
 
 
-
-
-    }
+    return transactions;
+}
 
 
 }
