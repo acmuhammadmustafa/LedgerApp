@@ -4,6 +4,7 @@ import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Main {
@@ -206,12 +207,36 @@ public class Main {
         } while (reportCommand != 0);
     }
 
+    ArrayList<LocalDate> selectedDates = new ArrayList<LocalDate>();
+
     private static void monthToDate() {
-        System.out.println("Month to Date works.");
+    LocalDate today = LocalDate.now();
+    LocalDate startOfMonth = today.withDayOfMonth(1);
+        System.out.println("====== Month to Date ======");
+    // The following goes through the transactions and locates the current day and checks if the transaction date is before the start of the month and prints if the conditions are true.
+        for (Transaction transaction : transactions) {
+            if (!transaction.getDate().isBefore(startOfMonth)){ // ! = makes it so the app checks if the transaction is on or after the month rather than before.
+                System.out.println(transaction);
+            }
+        }
+
     }
 
     private static void previousMonth() {
-        System.out.println("Previous month works.");
+        LocalDate today = LocalDate.now(); // Gathers today's date.
+        LocalDate startOfCurrentMonth = today.withDayOfMonth(1); // Gathers the first of the month in this instance:     2025-10-01.
+        LocalDate startOfPreviousMonth = startOfCurrentMonth.minusMonths(1); // Gathers the first of the previous month: 2025-09-01 (minusMonths(1) = subtracts one month)
+//        LocalDate endOfPreviousMonth = startOfCurrentMonth.minusDays(1); // Gathers the first day of this month then subtracts it by one for the end of the previous month. (2025-09-30)
+        // ^ Didn't end up being necessary.
+
+        System.out.println("====== Previous Month ======");
+
+        for (Transaction transaction : transactions) {
+            LocalDate previousDates = transaction.getDate();
+            if ((previousDates.isEqual(startOfPreviousMonth) || previousDates.isAfter(startOfPreviousMonth)) && previousDates.isBefore(startOfCurrentMonth)){
+                System.out.println(transaction);
+            }
+        }
     }
 
     private static void yearToDate() {
@@ -223,8 +248,20 @@ public class Main {
     }
 
     private static void searchByVendor() {
-        System.out.println("Search by vendor works.");
+        java.lang.String lookupVendor = ConsoleHelper.promptForString("Please enter the vendor");
+        for (Transaction transaction : transactions){
+            if (transaction == null){
+                continue;
+            }
+            if (Objects.equals(transaction.getVendor(), lookupVendor)){
+                displayItem(transaction);
+            }
+        }
     }
+    private static void displayItem(Transaction transaction){
+        System.out.println(transaction.getDate()+ " | " + transaction.getTime() + " | " + transaction.getDesc() + " | " + transaction.getVendor() + " | " + transaction.getAmount());
+    }
+
 // --------------------------------------------------------------------------------------------------------------------------------------------
 
     public static ArrayList<Transaction>getTransactionsFromFile(){
