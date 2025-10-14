@@ -207,8 +207,6 @@ public class Main {
         } while (reportCommand != 0);
     }
 
-    ArrayList<LocalDate> selectedDates = new ArrayList<LocalDate>();
-
     private static void monthToDate() {
     LocalDate today = LocalDate.now();
     LocalDate startOfMonth = today.withDayOfMonth(1);
@@ -284,7 +282,7 @@ public class Main {
 // --------------------------------------------------------------------------------------------------------------------------------------------
 
     public static ArrayList<Transaction>getTransactionsFromFile(){
-        ArrayList<Transaction>transactions = new ArrayList<Transaction>();
+        ArrayList<Transaction>transactions = new ArrayList<>();
         try{
             FileReader fileReader = new FileReader("transactions.csv");
             BufferedReader br = new BufferedReader(fileReader);
