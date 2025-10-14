@@ -116,7 +116,7 @@ public class Main {
                     break;
 
                 case "D":
-                    displayDEntries();
+                    displayDeposits();
                     System.out.println("======================");
                     break;
 
@@ -145,12 +145,23 @@ public class Main {
         }
     }
 
-    private static void displayDEntries() {
-        System.out.println("displayDEntries works.");
+    public static void displayDeposits() {
+        for (Transaction transaction : transactions){
+            if (transaction.getAmount() >= 0){
+                System.out.println(transaction);
+            }
+
+        }
+
     }
 
     private static void displayNegativeEntries() {
-        System.out.println("displayNegativeEntries works.");
+        for (Transaction transaction : transactions){
+            if (transaction.getAmount() <= 0){
+                System.out.println(transaction);
+            }
+
+        }
     }
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
     // Reports Menu:
@@ -247,7 +258,6 @@ public class Main {
     }
 
     public static ArrayList<Transaction>addTransactionToFile(){
-
 
 
     return transactions;
