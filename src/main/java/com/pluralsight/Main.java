@@ -3,13 +3,13 @@ package com.pluralsight;
 import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 
 public class Main {
+    // Creating an ArrayList to get transactions/information from the transactions.csv file:
     public static ArrayList<Transaction> transactions = getTransactionsFromFile();
-    // Creating an ArrayList to get transactions/information from the transactions.csv file.
+
 
 
 
@@ -20,10 +20,15 @@ public class Main {
         System.out.println();
         String command;
         do {
+            // Prompt user with Home Menu Options:
+            System.out.println();
+            System.out.println();
+            System.out.println("====== Home Menu ======");
             String homeMenu = "What would you like to do?\n D) Add Deposit\n P) Make Payment (Debit)\n L) Ledger\n X) Exit\n";
             System.out.println(homeMenu);
 
-            command = ConsoleHelper.promptForString("Enter your command").toLowerCase();
+            // Gather the input of the user and call upon a method based on the input:
+            command = ConsoleHelper.promptForString("Enter your command").toLowerCase().trim();
             switch (command) {
                 case "d":
                     addDeposit();
@@ -37,7 +42,6 @@ public class Main {
 
                 case "l":
                     ledgerMenu();
-                    System.out.println("======================");
                     break;
 
                 case "x":
@@ -47,7 +51,7 @@ public class Main {
                     System.out.println("Invalid input. Please enter a valid option.");
                     System.out.println("======================");
             }
-        } while (command.equalsIgnoreCase("X"));
+        } while (!command.equalsIgnoreCase("X"));
         }
 
 
@@ -78,7 +82,6 @@ public class Main {
     }
 
     private static void makePayment() {
-        LocalDateTime.now();
         String paymentDesc = ConsoleHelper.promptForString("Enter payment description");
         String paymentVendor = ConsoleHelper.promptForString("Enter vendor");
         double paymentAmount = ConsoleHelper.promptForDouble("Enter amount");
@@ -104,12 +107,14 @@ public class Main {
     }
 // Ledgers Menu: ------------------------------------------------------------------------------------------------------------------------------------
     private static void ledgerMenu() {
-        System.out.println("Loading ledger: ");
+        System.out.println();
+        System.out.println();
+        System.out.println("====== Ledger Menu ======");
         String ledgerMenu = "Choose an option: \n A) All\n D) Deposits\n P) Payments\n R) Reports\n H) Home\n";
         String ledgerCommand;
         do{
             System.out.println(ledgerMenu);
-            ledgerCommand = ConsoleHelper.promptForString("Enter your command").toUpperCase();
+            ledgerCommand = ConsoleHelper.promptForString("Enter your command").toUpperCase().trim();
             switch (ledgerCommand){
                 case "A":
                     displayEntries();
@@ -133,10 +138,12 @@ public class Main {
 
                 case "H":
                     return;
+
+                default:
+                    System.out.println("Invalid input. Please enter a valid option.");
+                    System.out.println("======================");
             }
-
-
-        } while (ledgerCommand.equalsIgnoreCase("H"));
+        } while (!ledgerCommand.equalsIgnoreCase("H"));
     }
 
     private static void displayEntries() {
@@ -153,7 +160,6 @@ public class Main {
             }
 
         }
-
     }
 
     private static void displayNegativeEntries() {
@@ -161,50 +167,65 @@ public class Main {
             if (transaction.getAmount() <= 0){
                 System.out.println(transaction);
             }
-
         }
     }
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
     // Reports Menu:
     private static void reportsMenu() {
-        System.out.println("Loading ledger: ");
+        System.out.println();
+        System.out.println();
+        System.out.println("====== Reports Menu ======");
         String reportMenu = "Choose an option: \n 1) Month to Date\n 2) Previous Month\n 3) Year to Date\n 4) Previous Year\n 5) Search by Vendor\n 0) Back";
         int reportCommand;
         do{
             System.out.println(reportMenu);
-            reportCommand = ConsoleHelper.promptForInt("Enter your command");
-            switch (reportCommand){
-                case 1:
-                    monthToDate();
-                    System.out.println("======================");
-                    break;
-
-                case 2:
-                    previousMonth();
-                    System.out.println("======================");
-                    break;
-
-                case 3:
-                    yearToDate();
-                    System.out.println("======================");
-                    break;
-
-                case 4:
-                    previousYear();
-                    System.out.println("======================");
-                    break;
-
-                case 5:
-                    searchByVendor();
-                    System.out.println("======================");
-                    break;
-
-                case 0:
-                    return;
-            }
 
 
-        } while (reportCommand != 0);
+                reportCommand = ConsoleHelper.promptForInt("Enter your command".trim());
+                switch (reportCommand) {
+                    case 1:
+                        monthToDate();
+                        System.out.println();
+                        System.out.println("======================");
+                        System.out.println();
+                        break;
+
+                    case 2:
+                        previousMonth();
+                        System.out.println();
+                        System.out.println("======================");
+                        System.out.println();
+                        break;
+
+                    case 3:
+                        yearToDate();
+                        System.out.println();
+                        System.out.println("======================");
+                        System.out.println();
+                        break;
+
+                    case 4:
+                        previousYear();
+                        System.out.println();
+                        System.out.println("======================");
+                        System.out.println();
+                        break;
+
+                    case 5:
+                        searchByVendor();
+                        System.out.println();
+                        System.out.println("======================");
+                        System.out.println();
+                        break;
+
+                    case 0:
+                        return;
+
+                    default:
+                        System.out.println("Invalid input. Please enter a valid option.");
+                        System.out.println("======================");
+                }
+        } while (true);
     }
 
     private static void monthToDate() {
@@ -217,15 +238,12 @@ public class Main {
                 System.out.println(transaction);
             }
         }
-
     }
 
     private static void previousMonth() {
         LocalDate today = LocalDate.now(); // Gathers today's date.
         LocalDate startOfCurrentMonth = today.withDayOfMonth(1); // Gathers the first of the month in this instance:     2025-10-01.
         LocalDate startOfPreviousMonth = startOfCurrentMonth.minusMonths(1); // Gathers the first of the previous month: 2025-09-01 (minusMonths(1) = subtracts one month)
-//        LocalDate endOfPreviousMonth = startOfCurrentMonth.minusDays(1); // Gathers the first day of this month then subtracts it by one for the end of the previous month. (2025-09-30)
-        // ^ Didn't end up being necessary.
 
         System.out.println("====== Previous Month ======");
 
@@ -290,12 +308,13 @@ public class Main {
             String lineFromString;
 
             while((lineFromString = br.readLine()) != null){
-                String[] parts = lineFromString.split("\\|"); // Splits the total information given at the "|":
+                // Splits the information into parts when it notices a "|".
+                String[] parts = lineFromString.split("\\|");
                 LocalDate date = LocalDate.parse(parts[0]);
                 LocalTime time = LocalTime.parse(parts[1]);
-                String desc = parts[2]; // First part that's split.
-                String vendor = parts[3]; // Second part that's split.
-                double amount = Double.parseDouble(parts[4]); // Third part that's split.
+                String desc = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
 
                 Transaction t = new Transaction(date,time,desc, vendor, amount); // Puts the split information in order.
                 transactions.add(t);
@@ -308,14 +327,14 @@ public class Main {
             System.out.println("Something is wrong..");
         }
 
-    return transactions; // Change from null to transactions after changing line 6 from private static to public static.
+    return transactions; // Change from null to transactions after changing getTransactionsFromFile ArrayList from private static to public static.
     }
 
-    public static ArrayList<Transaction>addTransactionToFile(){
-
-
-    return transactions;
-}
+//    public static ArrayList<Transaction>addTransactionToFile(){
+//
+//
+//    return transactions;
+//}
 
 
 }

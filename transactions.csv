@@ -7,12 +7,12 @@
 2023-04-17|16:47:20|Software subscription|Adobe|-54.99
 2023-04-18|13:20:15|Freelance payment|Jane Smith|800.00
 2023-04-18|17:35:05|Internet bill|Comcast|-89.00
-2023-04-19|09:00:00|Invoice 1003 paid|Beta LLC|1320.00
-2023-04-19|11:22:44|Laptop stand|Newegg|-35.99
-2023-04-20|12:00:00|Coffee|Dunkin Donuts|-4.75
-2023-04-20|13:45:32|Client refund|XYZ Inc|-300.00
-2023-04-21|10:10:10|Consulting fee received|OmniTech|2200.00
-2023-04-21|15:30:00|Team lunch|The Grill Spot|-78.50
+2024-04-19|09:00:00|Invoice 1003 paid|Beta LLC|1320.00
+2024-04-19|11:22:44|Laptop stand|Newegg|-35.99
+2024-04-20|12:00:00|Coffee|Dunkin Donuts|-4.75
+2024-04-20|13:45:32|Client refund|XYZ Inc|-300.00
+2024-04-21|10:10:10|Consulting fee received|OmniTech|2200.00
+2024-04-21|15:30:00|Team lunch|The Grill Spot|-78.50
 2023-04-22|08:15:30|Utilities bill|City Energy|-120.00
 2023-04-22|09:55:40|Cloud service renewal|AWS|-110.00
 2025-10-05|10:00:00|Invoice 1004 paid|Delta Partners|1675.00
@@ -21,3 +21,8 @@
 2025-10-11|15:42:11|Client payment|Echo Systems|1950.00
 2025-09-09|09:15:30|Office supplies|Staples|-67.23
 2025-09-10|11:50:00|Fuel|Gas Station|-52.10
+2025-10-14|16:29:08|Food|John|19.99
+2025-10-14|16:30:07|Subway|Subway|-19.99
+2025-10-14|16:43:40|Clothes|Hunbal|67.67
+2025-10-14|16:44:23|Clothes|Macy|-56.65
+2025-10-14|16:46:10|Soap|Dove|12.99

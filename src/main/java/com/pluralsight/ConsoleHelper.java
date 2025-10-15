@@ -15,10 +15,17 @@ public class ConsoleHelper {
     }
 
     public static int promptForInt(String prompt) {
-        System.out.println(prompt + ": ");
-        int result = scanner.nextInt();
-        scanner.nextLine();
-        return result;
+        while (true) {
+            System.out.print(prompt + ": ");
+            System.out.println();
+            String input = scanner.nextLine().trim();
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                System.out.println();
+            }
+        }
     }
 
     public static LocalDate promptForDate(String prompt){
