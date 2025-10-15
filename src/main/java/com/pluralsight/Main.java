@@ -141,7 +141,9 @@ public class Main {
             }
         }
     }
+
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
+
     // Reports Menu:
     private static void reportsMenu() {
         System.out.println();
@@ -204,7 +206,8 @@ public class Main {
     LocalDate today = LocalDate.now();
     LocalDate startOfMonth = today.withDayOfMonth(1);
         System.out.println("====== Month to Date ======");
-    // The following goes through the transactions and locates the current day and checks if the transaction date is before the start of the month and prints if the conditions are true.
+    // The following goes through the transactions and locates the current day and
+    // ^> checks if the transaction date is before the start of the month and prints if the conditions are true.
         for (Transaction transaction : transactions) {
             if (!transaction.getDate().isBefore(startOfMonth)){ // ! = makes it so the app checks if the transaction is on or after the month rather than before.
                 System.out.println(transaction);
@@ -242,7 +245,8 @@ public class Main {
 
     private static void previousYear() {
         int currentYear = LocalDate.now().getYear(); // Not LocalDate because what will be returned is an integer value, LocalDate wants a full date.
-        LocalDate startOfPreviousYear = LocalDate.of(currentYear-1,1,1); // (1, 1, 1 is the equivalent of saying January 1st of the previous year)
+        LocalDate startOfPreviousYear = LocalDate.of(currentYear -1,1,1);
+        // ^^^ --> (-1 = back one year, 01, 01 so(2024-01-01) is the equivalent of saying January 1st of the previous year.
 
         System.out.println("====== Previous Year Transactions ======");
 
@@ -265,6 +269,7 @@ public class Main {
             }
         }
     }
+
     private static void displayItem(Transaction transaction){
         System.out.println(transaction.getDate()+ " | " + transaction.getTime() + " | " + transaction.getDesc() + " | " + transaction.getVendor() + " | " + transaction.getAmount());
     }
@@ -274,6 +279,7 @@ public class Main {
     public static ArrayList<Transaction>getTransactionsFromFile(){
         ArrayList<Transaction>transactions = new ArrayList<>();
         try{
+            // Open the FileReader and BufferedReader:
             FileReader fileReader = new FileReader("transactions.csv");
             BufferedReader br = new BufferedReader(fileReader);
 
@@ -303,17 +309,22 @@ public class Main {
     }
 
     private static void addTransactionToFile(Transaction transaction){
+        // Formats the time:
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
+        // Brings the formatted time to a variable so that it can be used in the try and catch. (Rather than something like java.time.format.DateTimeFormatter@5a07e868)
         String formattedDate = transaction.getDate().format(dateFormatter);
         String formattedTime = transaction.getTime().format(timeFormatter);
 
         try  {
+            //Create a FileWriter and BufferedWriter:
             FileWriter fw = new FileWriter("transactions.csv",true);
             BufferedWriter bw = new BufferedWriter(fw);
+            //Create a new line and formatting the way the information will be written into transaction.csv.
             bw.newLine();
             bw.write(formattedDate + "|" + formattedTime + "|" + transaction.getDesc() + "|" + transaction.getVendor() + "|" + transaction.getAmount());
+            //Close the BufferedWriter. (FileWriter being closed is not necessary as BufferedWriter wraps around it.)
             bw.close();
         } catch (IOException e) {
             System.out.println("Something is wrong...");
