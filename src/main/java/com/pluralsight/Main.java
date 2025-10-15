@@ -5,13 +5,9 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-
 public class Main {
     // Creating an ArrayList to get transactions/information from the transactions.csv file:
     public static ArrayList<Transaction> transactions = getTransactionsFromFile();
-
-
-
 
     public static void main(String[] args) {
         System.out.println("=======================");
@@ -54,7 +50,7 @@ public class Main {
         } while (!command.equalsIgnoreCase("X"));
         }
 
-
+        // Method for the input "D" to add a deposit.
     private static void addDeposit() {
         String depositDesc = ConsoleHelper.promptForString("Enter deposit information");
         String depositVendor = ConsoleHelper.promptForString("Enter vendor");
@@ -62,50 +58,26 @@ public class Main {
         System.out.println("Thank you, information has been added.");
         Transaction newDeposit = new Transaction(LocalDate.now(),LocalTime.now(),depositDesc,depositVendor,depositAmount);
         Main.transactions.add(newDeposit);
-
-//        Formatting the recorded time.
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-        String formattedDate = newDeposit.getDate().format(dateFormatter);
-        String formattedTime = newDeposit.getTime().format(timeFormatter);
-
-        try  {
-            FileWriter fw = new FileWriter("transactions.csv",true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.newLine();
-            bw.write(formattedDate + "|" + formattedTime + "|" + newDeposit.getDesc() + "|" + newDeposit.getVendor() + "|" + newDeposit.getAmount());
-            bw.close();
-        } catch (IOException e) {
-            System.out.println("Something is wrong with addProduct()...");
-        }
+        addTransactionToFile(newDeposit);
     }
 
+        // Method for the input "P" to add a payment.
     private static void makePayment() {
         String paymentDesc = ConsoleHelper.promptForString("Enter payment description");
         String paymentVendor = ConsoleHelper.promptForString("Enter vendor");
         double paymentAmount = ConsoleHelper.promptForDouble("Enter amount");
         System.out.println("Thank you, payment has been confirmed.");
+
+        // Puts all the prompted information into one variable for it to be called upon when adding the transaction to the file.
         Transaction newPayment = new Transaction(LocalDate.now(),LocalTime.now(),paymentDesc,paymentVendor,-paymentAmount);
+
+        // Uses the variable made above and adds it to the list of all transactions that the app is gathering.
         Main.transactions.add(newPayment);
-        //        Formatting the recorded time.
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-        String formattedDate = newPayment.getDate().format(dateFormatter);
-        String formattedTime = newPayment.getTime().format(timeFormatter);
-
-        try  {
-            FileWriter fw = new FileWriter("transactions.csv",true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.newLine();
-            bw.write(formattedDate + "|" + formattedTime + "|" + newPayment.getDesc() + "|" + newPayment.getVendor() + "|" + newPayment.getAmount());
-            bw.close();
-        } catch (IOException e) {
-            System.out.println("Something is wrong with addProduct()...");
-        }
+        addTransactionToFile(newPayment);
     }
+
 // Ledgers Menu: ------------------------------------------------------------------------------------------------------------------------------------
+
     private static void ledgerMenu() {
         System.out.println();
         System.out.println();
@@ -330,11 +302,21 @@ public class Main {
     return transactions; // Change from null to transactions after changing getTransactionsFromFile ArrayList from private static to public static.
     }
 
-//    public static ArrayList<Transaction>addTransactionToFile(){
-//
-//
-//    return transactions;
-//}
+    private static void addTransactionToFile(Transaction transaction){
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
+        String formattedDate = transaction.getDate().format(dateFormatter);
+        String formattedTime = transaction.getTime().format(timeFormatter);
 
+        try  {
+            FileWriter fw = new FileWriter("transactions.csv",true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.newLine();
+            bw.write(formattedDate + "|" + formattedTime + "|" + transaction.getDesc() + "|" + transaction.getVendor() + "|" + transaction.getAmount());
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Something is wrong...");
+        }
+    }
 }
