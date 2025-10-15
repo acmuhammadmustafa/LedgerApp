@@ -1,17 +1,15 @@
 package com.pluralsight;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class Transaction {
-    private LocalDate date;
-    private LocalTime time;
-    private String desc; // Contains the description of the transaction.
-    private String vendor; // Contains the vendor of the transaction.
-    private double amount; // Contains the amount of the transaction.
+    private final LocalDate date;
+    private final LocalTime time;
+    private final String desc; // Contains the description of the transaction.
+    private final String vendor; // Contains the vendor of the transaction.
+    private final double amount; // Contains the amount of the transaction.
 
 
 
@@ -25,12 +23,10 @@ public class Transaction {
 
     }
     public LocalDate getDate() {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return date;
     }
 
     public LocalTime getTime() {
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         return time;
     }
 

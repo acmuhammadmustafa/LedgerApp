@@ -99,7 +99,7 @@ public class Main {
                     break;
 
                 case "P":
-                    displayNegativeEntries();
+                    displayPayments();
                     System.out.println("======================");
                     break;
 
@@ -118,6 +118,7 @@ public class Main {
         } while (!ledgerCommand.equalsIgnoreCase("H"));
     }
 
+    //Displays all entries.
     private static void displayEntries() {
         System.out.println("All entries: ");
         for (Transaction e : transactions){
@@ -125,6 +126,7 @@ public class Main {
         }
     }
 
+    //Displays Deposits (any positive ledger entry is a deposit.)
     public static void displayDeposits() {
         for (Transaction transaction : transactions){
             if (transaction.getAmount() >= 0){
@@ -134,7 +136,8 @@ public class Main {
         }
     }
 
-    private static void displayNegativeEntries() {
+     //Displays Payments (any negative ledger entry is a payment.)
+    private static void displayPayments() {
         for (Transaction transaction : transactions){
             if (transaction.getAmount() <= 0){
                 System.out.println(transaction);
@@ -202,6 +205,7 @@ public class Main {
         } while (true);
     }
 
+    //Displays all entries made from start of month to present day.
     private static void monthToDate() {
     LocalDate today = LocalDate.now();
     LocalDate startOfMonth = today.withDayOfMonth(1);
@@ -215,6 +219,7 @@ public class Main {
         }
     }
 
+    //Displays all entries made from previous month.
     private static void previousMonth() {
         LocalDate today = LocalDate.now(); // Gathers today's date.
         LocalDate startOfCurrentMonth = today.withDayOfMonth(1); // Gathers the first of the month in this instance:     2025-10-01.
@@ -230,6 +235,7 @@ public class Main {
         }
     }
 
+    //Displays all entries made from start of year to present day.
     private static void yearToDate() {
         LocalDate today = LocalDate.now();
         LocalDate startOfYear = today.withDayOfYear(1);
@@ -243,6 +249,7 @@ public class Main {
         }
     }
 
+    //Displays all entries made from previous year.
     private static void previousYear() {
         int currentYear = LocalDate.now().getYear(); // Not LocalDate because what will be returned is an integer value, LocalDate wants a full date.
         LocalDate startOfPreviousYear = LocalDate.of(currentYear -1,1,1);
@@ -258,6 +265,7 @@ public class Main {
         }
     }
 
+    //Displays all entries based on searched vendor.
     private static void searchByVendor() {
         java.lang.String lookupVendor = ConsoleHelper.promptForString("Please enter the vendor");
         for (Transaction transaction : transactions){
@@ -270,12 +278,13 @@ public class Main {
         }
     }
 
+    //Goes hand-in-hand with searchByVendor, displaying the transaction based on the searched vendor.
     private static void displayItem(Transaction transaction){
         System.out.println(transaction.getDate()+ " | " + transaction.getTime() + " | " + transaction.getDesc() + " | " + transaction.getVendor() + " | " + transaction.getAmount());
     }
 
 // --------------------------------------------------------------------------------------------------------------------------------------------
-
+// File Reader and Writer:
     public static ArrayList<Transaction>getTransactionsFromFile(){
         ArrayList<Transaction>transactions = new ArrayList<>();
         try{
