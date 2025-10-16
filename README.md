@@ -8,9 +8,7 @@ Title: Ledger App/Ledger Pro
 
 Overview:
 
-The Ledger Pro is a financial app that allows you to be able to add information about a deposit or payment that you've done and have the information stored in real time! It also allows you to call upon the information that you inputted
-
-in a filtered manner, whether it was when a transaction was made or what type, or if you want to see all transactions, it will do that too. Overall, this app is here to allow you to easily access and manage your personal finances.
+The Ledger Pro is a financial app that allows you to be able to add information about a deposit or payment that you've done and have the information stored in real time! It also allows you to call upon the information that you inputted in a filtered manner, whether it was when a transaction was made or what type, or if you want to see all transactions, it will do that too. Overall, this app is here to allow you to easily access and manage your personal finances.
 
 
 
@@ -54,67 +52,6 @@ This app allows you to:
 
 10.) Filter through a transaction based on the vendor (Amazon, Walmart, or an individual, etc.)
 
-
-
-=======================
-
-
-Menu Options:
-
-
-In the application you will be displayed with a home menu:
-
-
-<img width="262" height="292" alt="image" src="https://github.com/user-attachments/assets/bcb98590-3268-4e65-a64c-97cdfd03cda9" /> 
-
-
-
-Home Menu: 
-1.) "D) Add Deposit" prompts you to enter deposit information, such as food, clothes, an allowance, a payment received from your job/work, etc. Then it will prompt you to enter a vendor which would be where you received your money from, whether it was a refund, reward, a payment/check, etc. Finally, it'll prompt you on how much was given when asked to "Enter amount". 
-
-
-2.) "P) Make Payment (Debit)" prompts you to enter payment information, which would fall into categories such as chicken sandwiches, a new TV, pants and/or shirts, etc. Next you'll be prompted to enter a vendor would fall into the categories of shops, for example, Marshalls, Subway, Chick Fil A, etc. Finally, you'll be prompted to enter how much money was spent. Basically, this records what you spend your money on and where and how much you spend your money.
-
-
-3.) "L) Ledger" displays a new menu:
-
-
-<img width="262" height="235" alt="image" src="https://github.com/user-attachments/assets/2dc9b8fa-4ffd-41c7-bd42-a0d6fa7cda59" />
-
-
-
-============================================================================================
-
-
-Ledger Menu:
-
-4.) "A) All" will display ALL transactions. 
-
-5.) "D) Deposits" will display ONLY deposits.
-
-6.) "P) Payments" will display ONLY payments.
-
-7.) "R) Reports" will prompt you with a new menu:
-
-
-<img width="253" height="236" alt="image" src="https://github.com/user-attachments/assets/08f6bf82-986c-4a49-a5cf-342e9da13a51" />
-
-
-
-============================================================================================
-
-
-Reports Menu:
-
-8.) "1) Month to Date" displays transactions from the start of the current month to present day.
-
-9.) "2) Previous Month" displays transactions made within the previous month.
-
-10.) "3) Year to Date" displays transactions made from the current year to the present day.
-
-11.) "4) Previous Year" display transactions made from the previous year.
-
-12.) "5) Search by Vendor" filters through a transaction based on the vendor (Amazon, Walmart, or an individual, etc.)
 
 
 ============================================================================================
