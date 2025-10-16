@@ -85,6 +85,9 @@ Home Menu:
 
 
 
+============================================================================================
+
+
 Ledger Menu:
 
 4.) "A) All" will display ALL transactions. 
@@ -98,6 +101,9 @@ Ledger Menu:
 
 <img width="253" height="236" alt="image" src="https://github.com/user-attachments/assets/08f6bf82-986c-4a49-a5cf-342e9da13a51" />
 
+
+
+============================================================================================
 
 
 Reports Menu:
