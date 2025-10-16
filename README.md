@@ -136,8 +136,10 @@ Ledger Methods in Action:
 
 <img width="537" height="566" alt="image" src="https://github.com/user-attachments/assets/d17cbe93-4876-41df-b638-c3af804b7405" />
 
+
 This presents the layout of how the code is calling upon a stored list (transactions) and either presenting all of it, only the payments, or only the deposits based on the value relating to 0 (whether it's greater than or less than.)
 
+This also presents how the casing is being used in a similar manner for the Report and Home menu.
 
 
 ============================================================================================
@@ -145,11 +147,12 @@ This presents the layout of how the code is calling upon a stored list (transact
 Final Report Menu: 
 
 
-<img width="1587" height="865" alt="image" src="https://github.com/user-attachments/assets/011c9912-e0da-4ea8-b27d-e60ec2ccb583" />
+<img width="1378" height="904" alt="image" src="https://github.com/user-attachments/assets/5dbd2f2a-aa1b-422e-a000-8f0bc72d98a3" />
 
 
+[Gonna continue here]
 
-<img width="909" height="372" alt="image" src="https://github.com/user-attachments/assets/da3c2d2e-a688-4582-89ff-c9f38b5f7799" />
+
 
 
 
