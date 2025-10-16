@@ -9,6 +9,8 @@ public class Main {
     // Creating an ArrayList to get transactions/information from the transactions.csv file:
     public static ArrayList<Transaction> transactions = getTransactionsFromFile();
 
+// Ledger Pro begins here:
+
     public static void main(String[] args) {
         System.out.println("=======================");
         System.out.println("Welcome to Ledger Pro!");
@@ -19,8 +21,10 @@ public class Main {
             // Prompt user with Home Menu Options:
             System.out.println();
             System.out.println();
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------
+        // Home Menu:
             System.out.println("====== Home Menu ======");
-            String homeMenu = "What would you like to do?\n D) Add Deposit\n P) Make Payment (Debit)\n L) Ledger\n X) Exit\n";
+            String homeMenu = "What would you like to do?\n \n D) Add Deposit\n P) Make Payment (Debit)\n L) Ledger\n X) Exit\n=======================\n";
             System.out.println(homeMenu);
 
             // Gather the input of the user and call upon a method based on the input:
@@ -41,13 +45,14 @@ public class Main {
                     break;
 
                 case "x":
+                    System.out.println("Goodbye!");
                     return;
 
                 default:
                     System.out.println("Invalid input. Please enter a valid option.");
                     System.out.println("======================");
             }
-        } while (!command.equalsIgnoreCase("X"));
+        } while (!command.equalsIgnoreCase("x"));
         }
 
         // Method for the input "D" to add a deposit.
@@ -76,13 +81,13 @@ public class Main {
         addTransactionToFile(newPayment);
     }
 
-// Ledgers Menu: ------------------------------------------------------------------------------------------------------------------------------------
+// Ledgers Menu: -----------------------------------------------------------------------------------------------------------------------------------------------------
 
     private static void ledgerMenu() {
         System.out.println();
         System.out.println();
         System.out.println("====== Ledger Menu ======");
-        String ledgerMenu = "Choose an option: \n A) All\n D) Deposits\n P) Payments\n R) Reports\n H) Home\n";
+        String ledgerMenu = "Choose an option: \n A) All\n D) Deposits\n P) Payments\n R) Reports\n H) Home\n=========================\n";
         String ledgerCommand;
         do{
             System.out.println(ledgerMenu);
@@ -145,14 +150,13 @@ public class Main {
         }
     }
 
-// -----------------------------------------------------------------------------------------------------------------------------------------------------
+// Reports Menu: -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // Reports Menu:
     private static void reportsMenu() {
         System.out.println();
         System.out.println();
         System.out.println("====== Reports Menu ======");
-        String reportMenu = "Choose an option: \n 1) Month to Date\n 2) Previous Month\n 3) Year to Date\n 4) Previous Year\n 5) Search by Vendor\n 0) Back";
+        String reportMenu = "Choose an option: \n 1) Month to Date\n 2) Previous Month\n 3) Year to Date\n 4) Previous Year\n 5) Search by Vendor\n 0) Back\n==========================\n";
         int reportCommand;
         do{
             System.out.println(reportMenu);
@@ -210,8 +214,7 @@ public class Main {
     LocalDate today = LocalDate.now();
     LocalDate startOfMonth = today.withDayOfMonth(1);
         System.out.println("====== Month to Date ======");
-    // The following goes through the transactions and locates the current day and
-    // ^> checks if the transaction date is before the start of the month and prints if the conditions are true.
+    // The following goes through the transactions and locates the current day and Checks if the transaction date is on or after the start of the month.
         for (Transaction transaction : transactions) {
             if (!transaction.getDate().isBefore(startOfMonth)){ // ! = makes it so the app checks if the transaction is on or after the month rather than before.
                 System.out.println(transaction);
@@ -283,7 +286,7 @@ public class Main {
         System.out.println(transaction.getDate()+ " | " + transaction.getTime() + " | " + transaction.getDesc() + " | " + transaction.getVendor() + " | " + transaction.getAmount());
     }
 
-// --------------------------------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // File Reader and Writer:
     public static ArrayList<Transaction>getTransactionsFromFile(){
         ArrayList<Transaction>transactions = new ArrayList<>();

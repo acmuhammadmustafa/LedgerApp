@@ -56,10 +56,6 @@ public class Transaction {
         // Following this, we format the date, time, and then use date and time.format to bring in the formatted date and time with all the other info given.
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        return date.format(dateFormatter) + "|" +
-                time.format(timeFormatter) + "|" +
-                desc + "|" +
-                vendor + "|" +
-                String.format("%.2f", amount);
+        return date.format(dateFormatter) + "|" + time.format(timeFormatter) + "|" + desc + "|" + vendor + "|" + String.format("%.2f", amount);
     }
 }
