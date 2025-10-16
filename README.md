@@ -1,8 +1,6 @@
 =======================
 
-Title:
-
-Ledger App/Ledger Pro
+Title: Ledger App/Ledger Pro
 
 
 
