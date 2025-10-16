@@ -59,7 +59,7 @@ This app allows you to:
 Beginning by making an arraylist at the beginning above "main(String[] args) {":
 
 
-<img width="1658" height="706" alt="image" src="https://github.com/user-attachments/assets/2460155f-ce04-4af5-bc4e-8174cc8f3de5" />
+<img width="1658" height="706" alt="image" src="https://github.com/user-attachments/assets/52ce760b-4756-4b5b-af3c-62c53a61781c" />
 
 
 
