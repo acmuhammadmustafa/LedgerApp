@@ -208,8 +208,25 @@ Final Report Menu:
 <img width="1587" height="865" alt="image" src="https://github.com/user-attachments/assets/011c9912-e0da-4ea8-b27d-e60ec2ccb583" />
 
 
+
 <img width="909" height="372" alt="image" src="https://github.com/user-attachments/assets/da3c2d2e-a688-4582-89ff-c9f38b5f7799" />
 
 
 
 ============================================================================================
+
+Within the application:
+
+
+
+<img width="336" height="308" alt="image" src="https://github.com/user-attachments/assets/039ddaaa-22a6-49d9-91f2-bf9162a3d0cd" />
+
+
+
+
+<img width="315" height="210" alt="image" src="https://github.com/user-attachments/assets/be9d5be9-2052-4e68-b26f-a62f3f709a22" />
+
+
+
+
+<img width="310" height="225" alt="image" src="https://github.com/user-attachments/assets/3e13d290-5d34-4793-b9f4-0129819a02b9" />
