@@ -144,13 +144,18 @@ This also presents how the casing is being used in a similar manner for the Repo
 
 ============================================================================================
 
-Final Report Menu: 
+Report Methods in Action: 
 
 
 <img width="1378" height="904" alt="image" src="https://github.com/user-attachments/assets/5dbd2f2a-aa1b-422e-a000-8f0bc72d98a3" />
 
 
-[Gonna continue here]
+The first method (month to date) presents the present date being recognized, then the first day of the month being recognized, and finally, putting all the information gathered and comparing it with the transaction.csv file to see if it's not before the 1st of the month (so if it happened on or after), it would print the transaction. The method for "year to date" is very similar to this, however it collects the beginning of the year to the present date.
+
+
+The second method (previous month) presents the start of the current month and the previous month being recognized, then comparing the information gathered with the transaction.csv file to see if it falls between the start of the previous month and the start of the current month, and only prints the ones before the start of this month and after AND during the first of the previous month. The method for "previous year" is also similar to this, however it collects the beginning of the year to the end of the year.
+
+The third method (search by vendor) presents the string being recognized through the Console Helper asking the user to "Please enter the vendor", after the string is collected, the string is compared with the transaction.csv file and if it matches exactly, it displays that transaction(s).
 
 
 
