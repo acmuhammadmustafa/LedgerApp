@@ -119,19 +119,24 @@ Polished and completed version of FileWriter and BufferedWriter:
 
 ============================================================================================
 
-Final Home Menu: 
+Menu Layouts: 
 
 
 <img width="1241" height="678" alt="image" src="https://github.com/user-attachments/assets/d0b91683-8a52-4b21-acf6-6982dfb4a280" />
 
 
+This presents the layout of how the code is presenting the menu's as the Ledger and Report menu are very similar to the screenshot above. Not only does this present how the layout of the menu is pushed but also how based on the casing, different methods are called upon.
+
+
 
 ============================================================================================
 
-Final Ledger Menu:
+Ledger Methods in Action:
 
 
-<img width="1294" height="870" alt="image" src="https://github.com/user-attachments/assets/d50aadca-9961-484a-a350-c4c7138c9963" />
+<img width="537" height="566" alt="image" src="https://github.com/user-attachments/assets/d17cbe93-4876-41df-b638-c3af804b7405" />
+
+This presents the layout of how the code is calling upon a stored list (transactions) and either presenting all of it, only the payments, or only the deposits based on the value relating to 0 (whether it's greater than or less than.)
 
 
 
