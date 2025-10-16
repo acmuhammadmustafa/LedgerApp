@@ -20,7 +20,6 @@ public class Main {
         do {
             // Prompt user with Home Menu Options:
             System.out.println();
-            System.out.println();
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------
         // Home Menu:
             System.out.println("====== Home Menu ======");
@@ -238,24 +237,6 @@ public class Main {
         }
     }
 
-    //Displays all entries based on searched vendor.
-    private static void searchByVendor() {
-        java.lang.String lookupVendor = ConsoleHelper.promptForString("Please enter the vendor");
-        for (Transaction transaction : transactions){
-            if (transaction == null){
-                continue;
-            }
-            if (Objects.equals(transaction.getVendor(), lookupVendor)){
-                displayItem(transaction);
-            }
-        }
-    }
-
-    //Goes hand-in-hand with searchByVendor, displaying the transaction based on the searched vendor.
-    private static void displayItem(Transaction transaction){
-        System.out.println(transaction.getDate()+ " | " + transaction.getTime() + " | " + transaction.getDesc() + " | " + transaction.getVendor() + " | " + transaction.getAmount());
-    }
-
     //Displays all entries made from start of year to present day.
     private static void yearToDate() {
         LocalDate today = LocalDate.now();
@@ -286,7 +267,23 @@ public class Main {
         }
     }
 
+    //Displays all entries based on searched vendor.
+    private static void searchByVendor() {
+        java.lang.String lookupVendor = ConsoleHelper.promptForString("Please enter the vendor");
+        for (Transaction transaction : transactions){
+            if (transaction == null){
+                continue;
+            }
+            if (Objects.equals(transaction.getVendor(), lookupVendor)){
+                displayItem(transaction);
+            }
+        }
+    }
 
+    //Goes hand-in-hand with searchByVendor, displaying the transaction based on the searched vendor.
+    private static void displayItem(Transaction transaction){
+        System.out.println(transaction.getDate()+ " | " + transaction.getTime() + " | " + transaction.getDesc() + " | " + transaction.getVendor() + " | " + transaction.getAmount());
+    }
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // File Reader and Writer:
