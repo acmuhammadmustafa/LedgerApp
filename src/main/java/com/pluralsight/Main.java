@@ -9,6 +9,64 @@ public class Main {
     // Creating an ArrayList to get transactions/information from the transactions.csv file:
     public static ArrayList<Transaction> transactions = getTransactionsFromFile();
 
+    // File Reader and Writer:
+
+    public static ArrayList<Transaction>getTransactionsFromFile(){
+        ArrayList<Transaction>transactions = new ArrayList<>();
+        try{
+            // Open the FileReader and BufferedReader:
+            FileReader fileReader = new FileReader("transactions.csv");
+            BufferedReader br = new BufferedReader(fileReader);
+
+            String lineFromString;
+
+            while((lineFromString = br.readLine()) != null){
+                // Splits the information into parts when it notices a "|".
+                String[] parts = lineFromString.split("\\|");
+                LocalDate date = LocalDate.parse(parts[0]);
+                LocalTime time = LocalTime.parse(parts[1]);
+                String desc = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
+
+                Transaction t = new Transaction(date,time,desc, vendor, amount); // Puts the split information in order.
+                transactions.add(t);
+            }
+            // Close both the FileReader and BufferedReader.
+            br.close();
+            fileReader.close();
+
+        } catch (IOException e) {
+            System.out.println("Something is wrong..");
+        }
+
+        return transactions; // Change from null to transactions after changing getTransactionsFromFile ArrayList from private static to public static.
+    } // --> Ledger and Report Menu
+
+    private static void addTransactionToFile(Transaction transaction){
+        // Formats the time:
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        // Brings the formatted time to a variable so that it can be used in the try and catch. (Rather than something like java.time.format.DateTimeFormatter@5a07e868)
+        String formattedDate = transaction.getDate().format(dateFormatter);
+        String formattedTime = transaction.getTime().format(timeFormatter);
+
+        try  {
+            //Create a FileWriter and BufferedWriter:
+            FileWriter fw = new FileWriter("transactions.csv",true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            //Create a new line and formatting the way the information will be written into transaction.csv.
+            bw.newLine();
+            bw.write(formattedDate + "|" + formattedTime + "|" + transaction.getDesc() + "|" + transaction.getVendor() + "|" + transaction.getAmount());
+            //Close the BufferedWriter. (FileWriter being closed is not necessary as BufferedWriter wraps around it.)
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Something is wrong...");
+        }
+    } // --> Home Menu
+
+// ---------------------------------------------------------------------------------------------------------------------
 // Ledger Pro begins here:
 
     public static void main(String[] args) {
@@ -95,16 +153,19 @@ public class Main {
                 case "A":
                     displayEntries();
                     System.out.println("======================");
+                    System.out.println();
                     break;
 
                 case "D":
                     displayDeposits();
                     System.out.println("======================");
+                    System.out.println();
                     break;
 
                 case "P":
                     displayPayments();
                     System.out.println("======================");
+                    System.out.println();
                     break;
 
                 case "R":
@@ -275,70 +336,16 @@ public class Main {
                 continue;
             }
             if (Objects.equals(transaction.getVendor(), lookupVendor)){
-                displayItem(transaction);
+                System.out.println(transaction);
             }
-        }
-    }
-
-    //Goes hand-in-hand with searchByVendor, displaying the transaction based on the searched vendor.
-    private static void displayItem(Transaction transaction){
-        System.out.println(transaction.getDate()+ " | " + transaction.getTime() + " | " + transaction.getDesc() + " | " + transaction.getVendor() + " | " + transaction.getAmount());
-    }
-
-// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// File Reader and Writer:
-    public static ArrayList<Transaction>getTransactionsFromFile(){
-        ArrayList<Transaction>transactions = new ArrayList<>();
-        try{
-            // Open the FileReader and BufferedReader:
-            FileReader fileReader = new FileReader("transactions.csv");
-            BufferedReader br = new BufferedReader(fileReader);
-
-            String lineFromString;
-
-            while((lineFromString = br.readLine()) != null){
-                // Splits the information into parts when it notices a "|".
-                String[] parts = lineFromString.split("\\|");
-                LocalDate date = LocalDate.parse(parts[0]);
-                LocalTime time = LocalTime.parse(parts[1]);
-                String desc = parts[2];
-                String vendor = parts[3];
-                double amount = Double.parseDouble(parts[4]);
-
-                Transaction t = new Transaction(date,time,desc, vendor, amount); // Puts the split information in order.
-                transactions.add(t);
-            }
-            // Close both the FileReader and BufferedReader.
-            br.close();
-            fileReader.close();
-
-        } catch (IOException e) {
-            System.out.println("Something is wrong..");
-        }
-
-    return transactions; // Change from null to transactions after changing getTransactionsFromFile ArrayList from private static to public static.
-    }
-
-    private static void addTransactionToFile(Transaction transaction){
-        // Formats the time:
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-        // Brings the formatted time to a variable so that it can be used in the try and catch. (Rather than something like java.time.format.DateTimeFormatter@5a07e868)
-        String formattedDate = transaction.getDate().format(dateFormatter);
-        String formattedTime = transaction.getTime().format(timeFormatter);
-
-        try  {
-            //Create a FileWriter and BufferedWriter:
-            FileWriter fw = new FileWriter("transactions.csv",true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            //Create a new line and formatting the way the information will be written into transaction.csv.
-            bw.newLine();
-            bw.write(formattedDate + "|" + formattedTime + "|" + transaction.getDesc() + "|" + transaction.getVendor() + "|" + transaction.getAmount());
-            //Close the BufferedWriter. (FileWriter being closed is not necessary as BufferedWriter wraps around it.)
-            bw.close();
-        } catch (IOException e) {
-            System.out.println("Something is wrong...");
         }
     }
 }
+// Everything below ended up being more of a nuisance and was better off being removed:
+
+//    Goes hand-in-hand with searchByVendor, displaying the transaction based on the searched vendor.
+//    private static void displayItem(Transaction transaction){
+//    System.out.println(transaction.getDate()+ " | " + transaction.getTime() + " | " + transaction.getDesc() + " | " + transaction.getVendor() + " | " + transaction.getAmount());}
+
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------

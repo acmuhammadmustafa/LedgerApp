@@ -46,16 +46,10 @@ public class Transaction {
 
     @Override
     public String toString() {
-        // public String toString() {
-        //        return String.format("%d %s $%.2f", itemID,itemName,itemPrice);
-        //  }
-
-        // Changed the following above due to output in ledger displaying all entries to be "2025-10-14|11:36:51.086372900|Amazon Refund|Amazon|$2024.20"
-        // while transactions.csv resulting in "2025-10-14|11:36:51|Amazon Refund|Amazon|2024.2"
-
         // Following this, we format the date, time, and then use date and time.format to bring in the formatted date and time with all the other info given.
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        // Everything tied together:
         return date.format(dateFormatter) + "|" + time.format(timeFormatter) + "|" + desc + "|" + vendor + "|" + String.format("%.2f", amount);
     }
 }
